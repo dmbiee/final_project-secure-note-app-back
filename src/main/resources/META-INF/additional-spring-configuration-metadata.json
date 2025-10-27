@@ -1,0 +1,59 @@
+{
+  "properties": [
+    {
+      "name": "\nspring.datasource.url",
+      "type": "java.lang.String",
+      "description": "A description for '\nspring.datasource.ur'"
+    },
+    {
+      "name": "\nspring.datasource.driverClassName",
+      "type": "java.lang.String",
+      "description": "A description for '\nspring.datasource.driverClassNam'"
+    },
+    {
+      "name": "\nspring.datasource.username",
+      "type": "java.lang.String",
+      "description": "A description for '\nspring.datasource.usernam'"
+    },
+    {
+      "name": "\nspring.datasource.password",
+      "type": "java.lang.String",
+      "description": "A description for '\nspring.datasource.passwor'"
+    },
+    {
+      "name": "\nspring.jpa.hibernate.ddl-auto",
+      "type": "java.lang.String",
+      "description": "A description for '\nspring.jpa.hibernate.ddl-aut'"
+    },
+    {
+      "name": "\nspring.jpa.database-platform",
+      "type": "java.lang.String",
+      "description": "A description for '\nspring.jpa.database-platfor'"
+    },
+    {
+      "name": "\nspring.datasource.hikari.maximum-pool-size",
+      "type": "java.lang.String",
+      "description": "A description for '\nspring.datasource.hikari.maximum-pool-siz'"
+    },
+    {
+      "name": "\nspring.jpa.show-sql",
+      "type": "java.lang.String",
+      "description": "A description for '\nspring.jpa.show-sq'"
+    },
+    {
+      "name": "\nspring.jpa.properties.hibernate.format_sql",
+      "type": "java.lang.String",
+      "description": "A description for '\nspring.jpa.properties.hibernate.format_sq'"
+    },
+    {
+      "name": "=\nspring.h2.console.enabled",
+      "type": "java.lang.String",
+      "description": "A description for '=\nspring.h2.console.enabl'"
+    },
+    {
+      "name": "e\nspring.h2.console.path",
+      "type": "java.lang.String",
+      "description": "A description for 'e\nspring.h2.console.pa'"
+    }
+  ]
+}
