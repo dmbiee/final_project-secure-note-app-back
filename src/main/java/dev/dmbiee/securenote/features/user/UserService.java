@@ -12,18 +12,20 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    /**
-     * Знайти користувача за іменем.
-     */
     public UserEntity getByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    /**
-     * Перевірити пароль користувача.
-     */
     public boolean checkPassword(UserEntity user, String rawPassword) {
         return passwordEncoder.matches(rawPassword, user.getPassword());
+    }
+
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public UserEntity save(UserEntity user) {
+        return userRepository.save(user);
     }
 }

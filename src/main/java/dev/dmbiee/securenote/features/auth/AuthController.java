@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.dmbiee.securenote.features.auth.dtos.AuthRequest;
 import dev.dmbiee.securenote.features.auth.dtos.AuthResponse;
+import dev.dmbiee.securenote.features.user.dtos.UserRequest;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -21,5 +22,10 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
         AuthResponse token = authService.login(request);
         return ResponseEntity.ok(token);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody UserRequest request) {
+        return ResponseEntity.ok(authService.register(request));
     }
 }
