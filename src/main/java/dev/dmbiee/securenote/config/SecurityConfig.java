@@ -27,10 +27,17 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .authorizeHttpRequests(auth -> auth
-                        // .requestMatchers("/api/auth/**").permitAll()
-                        // .requestMatchers("/h2-console/**").permitAll()
-                        // .anyRequest().authenticated())
-                        .anyRequest().permitAll())
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(
+
+                                "/h2-console/**",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**/index.html",
+                                "/swagger-ui/**/favicon.ico")
+                        .permitAll()
+                        .anyRequest().authenticated())
+                // .anyRequest().permitAll())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
