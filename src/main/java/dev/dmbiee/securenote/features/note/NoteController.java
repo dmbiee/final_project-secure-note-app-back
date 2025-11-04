@@ -38,4 +38,14 @@ public class NoteController {
         String owner = authentication.getName();
         noteService.deleteNote(id, owner);
     }
+
+    @GetMapping("/shared")
+    public List<Note> getSharedNotes() {
+        return noteService.getSharedNotes();
+    }
+
+    @PutMapping("/{id}/share")
+    public Note toggleShare(@PathVariable Long id, Authentication authentication) {
+        return noteService.toggleShareStatus(id, authentication);
+    }
 }

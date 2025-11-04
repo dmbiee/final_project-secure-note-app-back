@@ -25,4 +25,9 @@ public class Note {
     private LocalDate date;
 
     private String owner;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean isShared = false;
+
 }

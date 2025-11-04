@@ -1,9 +1,11 @@
 package dev.dmbiee.securenote.features.note;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoteService {
@@ -47,5 +49,27 @@ public class NoteService {
         }
 
         noteRepository.delete(note);
+    }
+
+    public List<Note> getSharedNotes() {
+        return noteRepository.findByIsSharedTrue();
+    }
+
+    public Note toggleShareStatus(Long id, Authentication authentication) {
+        String username = authentication.getName();
+
+        Optional<Note> noteOpt = noteRepository.findById(id);
+        if (noteOpt.isEmpty()) {
+            throw new RuntimeException("Note not found");
+        }
+
+        Note note = noteOpt.get();
+
+        if (!note.getOwner().equals(username)) {
+            throw new RuntimeException("Access denied");
+        }
+
+        note.setShared(!note.isShared());
+        return noteRepository.save(note);
     }
 }
