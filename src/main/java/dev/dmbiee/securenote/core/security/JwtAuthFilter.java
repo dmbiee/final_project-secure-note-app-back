@@ -10,6 +10,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -29,18 +30,24 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             FilterChain chain)
             throws ServletException, IOException {
 
-        String authHeader = req.getHeader("Authorization");
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            chain.doFilter(req, res);
-            return;
+        String token = null;
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("jwt".equals(cookie.getName())) {
+                    token = cookie.getValue();
+                    System.out.println("Found JWT in cookie: " + token);
+                    break;
+                }
+            }
         }
 
-        String token = authHeader.substring(7);
-
-        if (jwtService.isValid(token)) {
+        if (token != null && jwtService.isValid(token)) {
             var authentication = jwtService.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            System.out.println("✅ Authentication set for user: " + authentication.getName());
+        } else {
+            System.out.println("❌ No valid JWT found in cookies");
         }
 
         chain.doFilter(req, res);
