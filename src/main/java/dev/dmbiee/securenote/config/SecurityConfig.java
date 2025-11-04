@@ -33,11 +33,11 @@ public class SecurityConfig {
                                 "/h2-console/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
-                                "/swagger-ui/**/index.html",
-                                "/swagger-ui/**/favicon.ico")
+                                "/swagger-ui/index.html",
+                                "/swagger-ui/favicon.ico")
                         .permitAll()
-                        .anyRequest().authenticated())
-                // .anyRequest().permitAll())
+                        // .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
