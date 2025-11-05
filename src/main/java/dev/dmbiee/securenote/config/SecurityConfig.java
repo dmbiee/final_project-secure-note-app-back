@@ -39,12 +39,14 @@ public class SecurityConfig {
 
                                 "/h2-console/**",
                                 "/swagger-ui/**",
-                                "/v3/api-docs/**").permitAll()
+                                "/v3/api-docs/**")
+                        .permitAll()
 
-                                // "/swagger-ui/**/index.html",
-                                // "/swagger-ui/**/favicon.ico"                        .requestMatchers("/api/test/**").authenticated() // тільки для авторизованих
-                        .anyRequest().authenticated())
-                // .anyRequest().permitAll())
+                        // "/swagger-ui/**/index.html",
+                        // "/swagger-ui/**/favicon.ico" .requestMatchers("/api/test/**").authenticated()
+                        // // тільки для авторизованих
+                        // .anyRequest().authenticated())
+                .anyRequest().permitAll())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
