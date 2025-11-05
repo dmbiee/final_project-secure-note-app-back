@@ -13,6 +13,7 @@ public class Friend {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "user_name")
     private String user;
 
     private String friend;
