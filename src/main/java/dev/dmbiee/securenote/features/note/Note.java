@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "notes")
 @Data
@@ -26,6 +28,7 @@ public class Note {
 
     private String owner;
 
+    @JsonProperty("isShared")
     @Column(nullable = false)
     @Builder.Default
     private boolean isShared = false;
