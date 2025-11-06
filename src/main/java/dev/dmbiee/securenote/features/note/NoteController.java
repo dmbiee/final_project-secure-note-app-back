@@ -48,4 +48,10 @@ public class NoteController {
     public Note toggleShare(@PathVariable Long id, Authentication authentication) {
         return noteService.toggleShareStatus(id, authentication);
     }
+
+    @GetMapping("/awailable")
+    public List<Note> getAwailableNotes(Authentication authentication) {
+        String username = authentication.getName();
+        return noteService.getSharedNotesForUser(username);
+    }
 }

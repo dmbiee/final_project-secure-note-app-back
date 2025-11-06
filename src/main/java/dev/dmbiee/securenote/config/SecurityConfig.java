@@ -1,5 +1,7 @@
 package dev.dmbiee.securenote.config;
 
+import org.springframework.http.HttpStatus;
+
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -46,7 +48,15 @@ public class SecurityConfig {
                         // "/swagger-ui/**/favicon.ico" .requestMatchers("/api/test/**").authenticated()
                         // // тільки для авторизованих
                         // .anyRequest().authenticated())
-                .anyRequest().permitAll())
+                        .anyRequest().permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/api/auth/logout")
+                        .deleteCookies("jwt")
+                        .clearAuthentication(true)
+                        .invalidateHttpSession(true)
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            response.setStatus(HttpStatus.OK.value());
+                        }))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
