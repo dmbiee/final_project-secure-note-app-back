@@ -3,6 +3,9 @@ package dev.dmbiee.securenote.features.note;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import dev.dmbiee.securenote.features.friend.Friend;
+import dev.dmbiee.securenote.features.friend.FriendService;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +14,11 @@ import java.util.Optional;
 public class NoteService {
 
     private final NoteRepository noteRepository;
+    private final FriendService friendService;
 
-    public NoteService(NoteRepository noteRepository) {
+    public NoteService(NoteRepository noteRepository, FriendService friendService) {
         this.noteRepository = noteRepository;
+        this.friendService = friendService;
     }
 
     public List<Note> getNotesByOwner(String owner) {
@@ -71,5 +76,16 @@ public class NoteService {
 
         note.setShared(!note.isShared());
         return noteRepository.save(note);
+    }
+
+    public List<Note> getSharedNotesForUser(String username) {
+        // Знаходимо усіх користувачів, у кого цей юзер є в друзях
+        var friends = friendService.getUsersWhoAddedMe(username);
+        var owners = friends.stream()
+                .map(Friend::getUser)
+                .toList();
+
+        // Повертаємо поширені нотатки цих користувачів
+        return noteRepository.findByIsSharedTrueAndOwnerIn(owners);
     }
 }

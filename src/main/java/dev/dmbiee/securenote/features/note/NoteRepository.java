@@ -10,4 +10,6 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     List<Note> findByOwner(String owner);
 
     List<Note> findByIsSharedTrue();
+
+    List<Note> findByIsSharedTrueAndOwnerIn(List<String> owners);
 }
