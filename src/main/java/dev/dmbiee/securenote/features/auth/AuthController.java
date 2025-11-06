@@ -24,12 +24,6 @@ public class AuthController {
 
     private final AuthService authService;
 
-    // @PostMapping("/login")
-    // public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
-    // AuthResponse token = authService.login(request);
-    // return ResponseEntity.ok(token);
-    // }
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request, HttpServletResponse response) {
 
@@ -37,9 +31,9 @@ public class AuthController {
 
         Cookie cookie = new Cookie("jwt", token);
         cookie.setHttpOnly(true);
-        cookie.setSecure(true); // true для HTTPS
+        cookie.setSecure(true);
         cookie.setPath("/");
-        cookie.setMaxAge(24 * 60 * 60); // 1 день
+        cookie.setMaxAge(24 * 60 * 60);
 
         response.addCookie(cookie);
 

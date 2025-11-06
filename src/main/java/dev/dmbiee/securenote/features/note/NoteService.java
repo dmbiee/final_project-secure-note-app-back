@@ -79,13 +79,11 @@ public class NoteService {
     }
 
     public List<Note> getSharedNotesForUser(String username) {
-        // Знаходимо усіх користувачів, у кого цей юзер є в друзях
         var friends = friendService.getUsersWhoAddedMe(username);
         var owners = friends.stream()
                 .map(Friend::getUser)
                 .toList();
 
-        // Повертаємо поширені нотатки цих користувачів
         return noteRepository.findByIsSharedTrueAndOwnerIn(owners);
     }
 }

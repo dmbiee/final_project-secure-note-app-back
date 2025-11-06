@@ -17,7 +17,7 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
-    // TO-DO: Move SECRET_KEY to application properties
+
     private static final String SECRET_KEY = "supersecretkeysupersecretkeysupersecretkey";
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 

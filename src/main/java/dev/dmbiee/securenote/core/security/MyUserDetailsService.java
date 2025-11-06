@@ -1,6 +1,5 @@
 package dev.dmbiee.securenote.core.security;
 
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,7 +9,7 @@ import dev.dmbiee.securenote.features.user.UserRepository;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
-   private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public MyUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -23,7 +22,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
-                .password(user.getPassword()) 
+                .password(user.getPassword())
                 .roles("USER")
                 .build();
     }

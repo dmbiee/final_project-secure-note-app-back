@@ -10,7 +10,6 @@ public class FriendService {
 
     private final FriendRepository friendRepository;
 
-    // 🔸 Додати друга
     public Friend addFriend(String user, String friendUsername) {
         if (user.equals(friendUsername)) {
             throw new RuntimeException("You cannot add yourself as a friend");
@@ -28,7 +27,6 @@ public class FriendService {
         return friendRepository.save(friend);
     }
 
-    // 🔸 Видалити друга
     public void deleteFriend(String user, String friendUsername) {
         Friend existing = friendRepository.findByUserAndFriend(user, friendUsername)
                 .orElseThrow(() -> new RuntimeException("Friend not found"));
@@ -36,12 +34,10 @@ public class FriendService {
         friendRepository.delete(existing);
     }
 
-    // 🔸 Отримати всіх своїх друзів
     public List<Friend> getMyFriends(String user) {
         return friendRepository.findByUser(user);
     }
 
-    // 🔸 Отримати всіх, у кого я є у списку друзів
     public List<Friend> getUsersWhoAddedMe(String user) {
         return friendRepository.findByFriend(user);
     }
