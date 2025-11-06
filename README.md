@@ -79,6 +79,9 @@ Users can add friends and share notes with them.
 
 ## 🏗 Architecture
 
+### Database Diagram
+![DB Diagram](docs/images/db.png)
+
 ### Class Diagram
 ```mermaid
 classDiagram
